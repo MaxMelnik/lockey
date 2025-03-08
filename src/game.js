@@ -1,4 +1,5 @@
 const Phaser = require('phaser');
+const readSquareArray = require('../src/helpers/readSquareArray');
 
 const config = {
     type: Phaser.WEBGL,
@@ -15,8 +16,9 @@ let game = new Phaser.Game(config);
 
 function preload() {
     console.log("preload");
-    this.load.image('tile-blank', '../img/active-tile-000-blank.png');
-    this.load.image('tile-L', '../img/active-tile-000-L.png');
+    this.load.image('1', '../img/active-tile-000-shadowed.png');
+    this.load.image('0', '../img/active-tile-000-active.png');
+    this.load.image('L', '../img/active-tile-000-L.png');
 }
 
 function create() {
@@ -25,9 +27,12 @@ function create() {
     let tileSize = 80;
     let tiles = [];
 
+    const map = readSquareArray();
+    console.log(map);
+
     for (let row = 0; row < gridVerticalSize; row++) {
         for (let col = 0; col < gridHorizontalSize; col++) {
-            let tile = this.add.sprite(col * tileSize, row * tileSize, 'tile-L').setOrigin(0, 0);
+            let tile = this.add.sprite(col * tileSize, row * tileSize, map[row][col]).setOrigin(0, 0);
             tiles.push(tile);
         }
     }
