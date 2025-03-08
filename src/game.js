@@ -16,9 +16,11 @@ let game = new Phaser.Game(config);
 
 function preload() {
     console.log("preload");
-    this.load.image('1', '../img/active-tile-000-shadowed.png');
-    this.load.image('0', '../img/active-tile-000-active.png');
-    this.load.image('L', '../img/active-tile-000-L.png');
+    this.load.image('0', '../img/tile-000-socket.png');
+    this.load.image('1', '../img/tile-000-shadowed.png');
+    this.load.image('2', '../img/tile-000-shine.png');
+    this.load.image('L', '../img/tile-000-shine-L.png');
+    this.load.image('O', '../img/tile-000-shine-O.png');
 }
 
 function create() {
