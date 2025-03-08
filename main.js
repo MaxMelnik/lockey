@@ -4,8 +4,8 @@ let mainWindow;
 
 app.whenReady().then(() => {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 14*80 + 40,
+        height: 7*80 + 200,
         frame: false,
         transparent: false,
         alwaysOnTop: false,

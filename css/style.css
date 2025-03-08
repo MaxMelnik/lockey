@@ -12,11 +12,13 @@
     font-style: normal;
 }
 
-body {
+html, body {
     font-family: 'UnownFont', "Comic Sans MS", Helvetica, sans-serif;
     -webkit-app-region: no-drag !important;
     user-select: none;
     -webkit-user-select: none;
+    overflow: hidden;
+    background: #36250c;
 }
 
 /* Prevent buttons, inputs, and interactive elements from being dragged */
@@ -27,15 +29,18 @@ button, input, textarea {
 
 canvas {
     pointer-events: auto !important;
+    display: block;
 }
 
 #game-container {
     width: 100vw;
     height: 100vh;
-    background: black;
+    background: #36250c;
     overflow: hidden;
 }
 
 #drag {
+    width: 100vw;
+    height: 10px;
     -webkit-app-region: drag;
 }
