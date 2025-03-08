@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^35.0.0"
+    "electron": "^35.0.0",
+    "phaser": "^3.88.2",
+    "phaser3spectorjs": "^0.0.8"
   }
 }

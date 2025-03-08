@@ -1,5 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
+const {app, BrowserWindow} = require('electron');
 
 let mainWindow;
 
@@ -9,23 +8,14 @@ app.whenReady().then(() => {
         height: 600,
         frame: false,
         transparent: false,
+        alwaysOnTop: false,
         webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true,
-            preload: path.join(__dirname, 'scripts/preload.js') // Load a secure script for communication
+            nodeIntegration: true,
+            contextIsolation: false,
         }
     });
 
     mainWindow.loadFile('./pages/index.html');
 
     // mainWindow.webContents.openDevTools();
-});
-
-// Handle window control messages
-ipcMain.on('close-app', () => {
-    app.quit();
-});
-
-ipcMain.on('minimize-app', () => {
-    mainWindow.minimize();
 });
