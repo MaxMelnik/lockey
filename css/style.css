@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'UnownFont';
+    src: url('../fonts/Unown.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DiabloHeavyFont';
+    src: url('../fonts/Diablo Heavy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'UnownFont', "Comic Sans MS", Helvetica, sans-serif;
+    -webkit-app-region: drag !important;
+}
+
+/* Prevent buttons, inputs, and interactive elements from being dragged */
+button, input, textarea {
+    -webkit-app-region: no-drag;
+    cursor: pointer;
+}

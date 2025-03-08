@@ -8,6 +8,7 @@ app.whenReady().then(() => {
         width: 800,
         height: 600,
         frame: false,
+        transparent: false,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
