@@ -18,7 +18,7 @@ html, body {
     user-select: none;
     -webkit-user-select: none;
     overflow: hidden;
-    background: #36250c;
+    background: #281801;
 }
 
 /* Prevent buttons, inputs, and interactive elements from being dragged */
@@ -35,7 +35,7 @@ canvas {
 #game-container {
     width: 100vw;
     height: 100vh;
-    background: #36250c;
+    background: #281801;
     overflow: hidden;
 }
 
