@@ -17,7 +17,7 @@ let game = new Phaser.Game(config);
 
 function preload() {
     console.log("preload");
-    this.load.audio('moveSound', '../assets/sfx/move.mp3');
+    this.load.audio('moveSound', '../assets/sfx/move-fast.mp3');
     this.load.image('0', '../assets/img/tile-000-socket.png');
     this.load.image('1', '../assets/img/tile-000-shadowed.png');
     this.load.image('2', '../assets/img/tile-002-active.png');
