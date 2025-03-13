@@ -1,6 +1,7 @@
 const Phaser = require('phaser');
 const readSquareArray = require('../src/helpers/readSquareArray');
 const swapTilesTextures = require('../src/helpers/swapTilesTextures');
+const moveTileTexture = require('../src/helpers/moveTileTexture');
 
 const config = {
     type: Phaser.WEBGL,
@@ -18,9 +19,11 @@ let game = new Phaser.Game(config);
 function preload() {
     console.log("preload");
     this.load.audio('moveSound', '../assets/sfx/move-fast.mp3');
+    this.load.audio('winSound', '../assets/sfx/win.mp3');
     this.load.image('0', '../assets/img/tile-000-socket.png');
     this.load.image('1', '../assets/img/tile-000-shadowed.png');
     this.load.image('2', '../assets/img/tile-002-active.png');
+    this.load.image('7', '../assets/img/tile-001-slot.png');
     this.load.image('L', '../assets/img/tile-002-active-L.png');
     this.load.image('O', '../assets/img/tile-002-active-O.png');
     this.load.image('C', '../assets/img/tile-002-active-C.png');
@@ -52,9 +55,11 @@ function create() {
     let tileSize = 80;
     let controlTiles = ['down', 'left', 'right', 'up'];
     let alphabet = ['L', 'O', 'C', 'K', 'E', 'Y', 'P', 'W', 'R'];
+    let freeTile = ['0', '7'];
     let tiles = [];
 
     let clickSound = this.sound.add('moveSound');
+    let winSound = this.sound.add('winSound');
 
     const map = readSquareArray();
     console.log(map);
@@ -85,14 +90,18 @@ function create() {
                 console.log(`Pointer down at tile (${col}, ${row})`);
                 if (controlTiles.includes(tile.originalTexture)) {
                     clickSound.play();
-                    this.setTexture(tile.originalTexture + '-p')
+                    this.setTexture(tile.originalTexture + '-p');
+                }
+
+                if (tile.originalTexture === '2') {
+                    winSound.play();
                 }
 
                 if (tile.originalTexture === 'down') {
                     for (let row = gridVerticalSize - 1; row > 0; row--) {
                         for (let col = 0; col < gridHorizontalSize; col++) {
-                            if (alphabet.includes(tileGrid[row][col].texture.key) && tileGrid[row + 1][col].texture.key === '0') {
-                                swapTilesTextures(tileGrid[row][col], tileGrid[row + 1][col]);
+                            if (alphabet.includes(tileGrid[row][col].texture.key) && freeTile.includes(tileGrid[row + 1][col].texture.key)) {
+                                moveTileTexture(tileGrid[row][col], tileGrid[row + 1][col]);
                             }
                         }
                     }
@@ -101,8 +110,8 @@ function create() {
                 if (tile.originalTexture === 'left') {
                     for (let row = 0; row < gridVerticalSize; row++) {
                         for (let col = 0; col < gridHorizontalSize; col++) {
-                            if (alphabet.includes(tileGrid[row][col].texture.key) && tileGrid[row][col - 1].texture.key === '0') {
-                                swapTilesTextures(tileGrid[row][col], tileGrid[row][col - 1]);
+                            if (alphabet.includes(tileGrid[row][col].texture.key) && freeTile.includes(tileGrid[row][col - 1].texture.key)) {
+                                moveTileTexture(tileGrid[row][col], tileGrid[row][col - 1]);
                             }
                         }
                     }
@@ -111,8 +120,8 @@ function create() {
                 if (tile.originalTexture === 'right') {
                     for (let row = 0; row < gridVerticalSize; row++) {
                         for (let col = gridHorizontalSize - 1; col > 0; col--) {
-                            if (alphabet.includes(tileGrid[row][col].texture.key) && tileGrid[row][col + 1].texture.key === '0') {
-                                swapTilesTextures(tileGrid[row][col], tileGrid[row][col + 1]);
+                            if (alphabet.includes(tileGrid[row][col].texture.key) && freeTile.includes(tileGrid[row][col + 1].texture.key)) {
+                                moveTileTexture(tileGrid[row][col], tileGrid[row][col + 1]);
                             }
                         }
                     }
@@ -121,8 +130,8 @@ function create() {
                 if (tile.originalTexture === 'up') {
                     for (let row = 0; row < gridVerticalSize; row++) {
                         for (let col = 0; col < gridHorizontalSize; col++) {
-                            if (alphabet.includes(tileGrid[row][col].texture.key) && tileGrid[row - 1][col].texture.key === '0') {
-                                swapTilesTextures(tileGrid[row][col], tileGrid[row - 1][col]);
+                            if (alphabet.includes(tileGrid[row][col].texture.key) && freeTile.includes(tileGrid[row - 1][col].texture.key)) {
+                                moveTileTexture(tileGrid[row][col], tileGrid[row - 1][col]);
                             }
                         }
                     }
